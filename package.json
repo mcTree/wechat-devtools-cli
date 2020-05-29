@@ -1,0 +1,18 @@
+{
+  "name": "@mcswift/wechat-devtools-cli",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/mcTree/wechat-devtools-cli.git",
+  "author": "McSwift <publish@mcswift.pro>",
+  "license": "MIT",
+  "bin": {
+    "wx-devtools": "bin/devtools.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fs-extra": "^9.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
