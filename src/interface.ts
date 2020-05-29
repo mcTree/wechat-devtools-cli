@@ -15,10 +15,6 @@ type Mode = "cli"|"http"
 type Command = keyof typeof CommandEnum;
 type LanucherOption = keyof typeof LanucherOptionsEnum;
 
-interface ModeExecutor {
-  (command:Command,...rest:string[]):any;
-}
+type ModeExecutor = (command:Command,...rest:string[]) =>any;
 
-interface CommandFunc {
-  (executor:ModeExecutor,...rest:any):Promise<any>;
-}
+type CommandFunc = (executor:ModeExecutor,...rest:any) =>Promise<any>;

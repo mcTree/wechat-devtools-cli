@@ -1,6 +1,6 @@
 export default function (
-  func: Function,
-  argv: Array<any> = process.argv
+  func: (...rest:any[]) => Promise<any>,
+  argv: any[] = process.argv
 ): Promise<any> {
   return func(...argv);
 };

@@ -2,7 +2,7 @@ import fs from"fs-extra";
 import execa from "execa";
 import path from"path";
 
-export const getPort = async function () {
+export const getPort = async  ()=> {
   // ~/AppData/Local/微信开发者工具/User Data/Default/.ide
   const configFilePath = `${process.env.USERPROFILE}/AppData/Local/微信开发者工具/User Data`;
   const dirs = await fs.readdir(configFilePath);

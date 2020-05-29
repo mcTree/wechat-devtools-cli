@@ -1,5 +1,5 @@
 import { getProjectDir,getMiniprogramRoot } from "./utils";
-import path from "path";
+import Path from "path";
 import chokidar from "chokidar"
 
 
@@ -22,16 +22,16 @@ export const buildNpm:CommandFunc = async (executor:ModeExecutor, options) => {
     let watchPath = "";
     const isLib = options.includes("--modules") || options.includes("--lib");
     if (isLib) {
-      watchPath = path.join(projectDir, miniprogramRoot, "node_modules");
+      watchPath = Path.join(projectDir, miniprogramRoot, "node_modules");
     } else {
-      watchPath = path.resolve(projectDir, miniprogramRoot, "package.json");
+      watchPath = Path.resolve(projectDir, miniprogramRoot, "package.json");
     }
 
     return new Promise((resolve, reject) => {
       try {
-        chokidar.watch(watchPath).on("all", (event, path) => {
+        chokidar.watch(watchPath).on("all", (event, dir) => {
           executor(...cliParams)
-          resolve({ event, path });
+          resolve({ event, dir });
         });
       } catch (e) {
         reject(e);
