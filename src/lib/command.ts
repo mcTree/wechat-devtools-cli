@@ -1,6 +1,6 @@
 import { getProjectDir,getMiniprogramRoot } from "./utils";
-import Path from "path";
 import chokidar from "chokidar"
+const Path = require("path");
 
 
 export const open:CommandFunc = async (execute:ModeExecutor) => {

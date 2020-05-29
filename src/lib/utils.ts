@@ -1,6 +1,6 @@
-import fs from"fs-extra";
-import execa from "execa";
-import path from"path";
+const fs = require("fs-extra");
+const execa = require("execa");
+const path = require('path')
 
 export const getPort = async  ()=> {
   // ~/AppData/Local/微信开发者工具/User Data/Default/.ide
@@ -31,10 +31,11 @@ export const getProjectDir = (argv1 = process.argv[1]) => {
   const configFileName = "project.config.json";
   const pathList = argv1.split(path.sep);
   for (;;) {
+    pathList.pop();
     if (pathList.length === 1) break;
     const temp = pathList.join(path.sep) + path.sep;
-    const hasCofig = fs.readdirSync(temp).includes(configFileName);
-    if (hasCofig) {
+    const hasConf = fs.readdirSync(temp).includes(configFileName);
+    if (hasConf) {
       const confStr = fs
         .readFileSync(path.join(temp, configFileName))
         .toString();
@@ -44,7 +45,6 @@ export const getProjectDir = (argv1 = process.argv[1]) => {
         return temp;
       }
     }
-    pathList.pop();
   }
   throw new Error("Not Find Project Dir");
 };

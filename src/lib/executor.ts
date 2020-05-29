@@ -1,11 +1,13 @@
 import { getDevtoolsDir } from "./utils.js";
-import execa from "execa";
 import axios from "axios";
-import { getPort } from "./utils"
+import { getPort } from "./utils";
+
+const execa = require("execa");
 
 export const cli:ModeExecutor = async (...options) => {
   const devtools = await getDevtoolsDir();
-  const command = `${devtools}\\cli`;
+  const command = `${devtools}\\cli.bat`;
+  console.log('实际命令:', command, ...options)
   return execa(command, options);
 };
 
