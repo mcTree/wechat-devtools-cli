@@ -1,5 +1,6 @@
 import Lanucher from "./lib/lanucher";
-import camelCase from "lodash/camelCase"
+// import { camelCase } from "lodash";
+const camelCase = require("lodash/camelCase")
 
 Lanucher(
   async (
