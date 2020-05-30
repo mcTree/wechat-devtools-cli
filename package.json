@@ -10,8 +10,8 @@
     "build": "npm run lint && tsc",
     "lint": "tslint -p ./",
     "lint:fix": "tslint -p ./ --fix",
-    "prepublishOnly": "npm run build && npm run lint",
-    "precommit": "npm run build && npm run lint"
+    "prepublishOnly": "npm run build ",
+    "precommit": "npm run build"
   },
   "bin": {
     "wx-devtools": "bin/devtools.js"
