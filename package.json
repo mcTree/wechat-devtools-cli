@@ -1,6 +1,6 @@
 {
   "name": "@mcswift/wechat-devtools-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "repository": "https://github.com/mcTree/wechat-devtools-cli.git",
   "author": "McSwift <publish@mcswift.pro>",
@@ -10,14 +10,15 @@
     "build": "npm run lint && tsc",
     "lint": "tslint -p ./",
     "lint:fix": "tslint -p ./ --fix",
-    "prepublishOnly": "npm run build && npm run lint",
-    "precommit": "npm run build && npm run lint"
+    "prepublishOnly": "npm run build ",
+    "precommit": "npm run build"
   },
   "bin": {
     "wx-devtools": "bin/devtools.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "chalk": "^4.0.0",
     "chokidar": "^3.4.0",
     "execa": "^4.0.2",
     "fs-extra": "^9.0.0",
