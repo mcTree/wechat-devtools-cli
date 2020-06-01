@@ -5,6 +5,10 @@ var LanucherOptionsEnum;
     LanucherOptionsEnum[LanucherOptionsEnum["--watch"] = 2] = "--watch";
     LanucherOptionsEnum[LanucherOptionsEnum["--lib"] = 3] = "--lib";
     LanucherOptionsEnum[LanucherOptionsEnum["--project"] = 4] = "--project";
+    LanucherOptionsEnum[LanucherOptionsEnum["--win32"] = 5] = "--win32";
+    LanucherOptionsEnum[LanucherOptionsEnum["--posix"] = 6] = "--posix";
+    LanucherOptionsEnum[LanucherOptionsEnum["--modules-file"] = 7] = "--modules-file";
+    LanucherOptionsEnum[LanucherOptionsEnum["--package-conf"] = 8] = "--package-conf";
 })(LanucherOptionsEnum || (LanucherOptionsEnum = {}));
 var CommandEnum;
 (function (CommandEnum) {

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDevtoolsDir = exports.getMiniprogramRoot = exports.getProjectDir = exports.getPort = void 0;
 const fs = require("fs-extra");
 const execa = require("execa");
-const path = require('path');
+const chalk = require("chalk");
 exports.getPort = async () => {
     // ~/AppData/Local/微信开发者工具/User Data/Default/.ide
     const configFilePath = `${process.env.USERPROFILE}/AppData/Local/微信开发者工具/User Data`;
@@ -26,18 +26,20 @@ exports.getPort = async () => {
     });
 };
 let miniprogramRootCache = "";
-exports.getProjectDir = (argv1 = process.argv[1]) => {
+exports.getProjectDir = (argv1 = process.argv[1], Path = require('path')) => {
+    console.log(chalk.green(Path.sep));
     const configFileName = "project.config.json";
-    const pathList = argv1.split(path.sep);
+    const pathList = argv1.split(Path.sep);
+    console.log(pathList);
     for (;;) {
         pathList.pop();
         if (pathList.length === 1)
             break;
-        const temp = pathList.join(path.sep) + path.sep;
+        const temp = pathList.join(Path.sep) + Path.sep;
         const hasConf = fs.readdirSync(temp).includes(configFileName);
         if (hasConf) {
             const confStr = fs
-                .readFileSync(path.join(temp, configFileName))
+                .readFileSync(Path.join(temp, configFileName))
                 .toString();
             const confObj = JSON.parse(confStr);
             if (typeof confObj.appid === "string" && confObj.appid !== "") {
@@ -48,17 +50,20 @@ exports.getProjectDir = (argv1 = process.argv[1]) => {
     }
     throw new Error("Not Find Project Dir");
 };
-exports.getMiniprogramRoot = () => {
+exports.getMiniprogramRoot = (argv1 = process.argv[1], Path) => {
     if (miniprogramRootCache !== "")
         return miniprogramRootCache;
-    exports.getProjectDir();
+    exports.getProjectDir(argv1, Path);
     return miniprogramRootCache;
 };
-exports.getDevtoolsDir = async () => {
-    const { stdout } = await execa.command("powershell reg query HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\微信开发者工具 /v UninstallString");
+exports.getDevtoolsDir = async (argv1 = process.argv[1]) => {
+    const Path = require('path').win32;
+    const { stdout } = await execa.command("powershell.exe reg query HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\微信开发者工具 /v UninstallString");
     const temp = stdout.trimLeft().trimRight().split("  ");
     const uninstall = temp[temp.length - 1];
-    const devtools = path.dirname(uninstall);
+    console.log(chalk(Path.sep));
+    const devtools = Path.dirname(uninstall);
+    console.log(chalk.yellow(uninstall), chalk.red(devtools));
     return Promise.resolve(devtools);
 };
 //# sourceMappingURL=utils.js.map
