@@ -4,6 +4,10 @@ enum LanucherOptionsEnum {
   "--watch",
   "--lib",
   "--project",
+  "--win32",
+  "--posix",
+  "--modules-file",
+  "--package-conf"
 }
 
 enum CommandEnum {
@@ -11,7 +15,8 @@ enum CommandEnum {
   "build-npm",
 }
 
-type Mode = "cli"|"http"
+type SystemFlag ='win32'|'posix'|''
+type ExecuterMode = "cli"|"http"
 type Command = keyof typeof CommandEnum;
 type LanucherOption = keyof typeof LanucherOptionsEnum;
 
