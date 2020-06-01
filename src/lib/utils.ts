@@ -1,6 +1,6 @@
 const fs = require("fs-extra");
 const execa = require("execa");
-const path = require('path')
+const chalk =require("chalk")
 
 export const getPort = async  ()=> {
   // ~/AppData/Local/微信开发者工具/User Data/Default/.ide
@@ -27,17 +27,19 @@ export const getPort = async  ()=> {
 
 let miniprogramRootCache = "";
 
-export const getProjectDir = (argv1 = process.argv[1]) => {
+export const getProjectDir = (argv1 = process.argv[1], Path = require('path')) => {
+  console.log(chalk.green(Path.sep))
   const configFileName = "project.config.json";
-  const pathList = argv1.split(path.sep);
+  const pathList = argv1.split(Path.sep);
+  console.log(pathList)
   for (;;) {
     pathList.pop();
     if (pathList.length === 1) break;
-    const temp = pathList.join(path.sep) + path.sep;
+    const temp = pathList.join(Path.sep) + Path.sep;
     const hasConf = fs.readdirSync(temp).includes(configFileName);
     if (hasConf) {
       const confStr = fs
-        .readFileSync(path.join(temp, configFileName))
+        .readFileSync(Path.join(temp, configFileName))
         .toString();
       const confObj = JSON.parse(confStr);
       if (typeof confObj.appid === "string" && confObj.appid !== "") {
@@ -49,19 +51,26 @@ export const getProjectDir = (argv1 = process.argv[1]) => {
   throw new Error("Not Find Project Dir");
 };
 
-export const getMiniprogramRoot = () => {
+export const getMiniprogramRoot = (argv1 = process.argv[1], Path) => {
   if (miniprogramRootCache !== "") return miniprogramRootCache;
-  getProjectDir();
+  getProjectDir(argv1, Path);
   return miniprogramRootCache;
 };
 
-export const getDevtoolsDir = async () => {
+export const getDevtoolsDir = async (argv1 = process.argv[1]) => {
+  const Path = require('path').win32
   const { stdout } = await execa.command(
-    "powershell reg query HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\微信开发者工具 /v UninstallString"
+    "powershell.exe reg query HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\微信开发者工具 /v UninstallString"
   );
   const temp = stdout.trimLeft().trimRight().split("  ");
   const uninstall = temp[temp.length - 1];
-  const devtools = path.dirname(uninstall);
+  console.log(chalk(Path.sep))
+  const devtools = Path.dirname(uninstall);
+
+  console.log(
+    chalk.yellow(uninstall),
+    chalk.red(devtools)
+  )
   return Promise.resolve(devtools);
 };
 
