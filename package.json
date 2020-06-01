@@ -1,6 +1,6 @@
 {
   "name": "@mcswift/wechat-devtools-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "repository": "https://github.com/mcTree/wechat-devtools-cli.git",
   "author": "McSwift <publish@mcswift.pro>",
