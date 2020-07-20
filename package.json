@@ -22,7 +22,7 @@
     "chokidar": "^3.4.0",
     "execa": "^4.0.2",
     "fs-extra": "^9.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash-es": "^4.17.15"
   },
   "publishConfig": {
