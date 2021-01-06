@@ -17,7 +17,7 @@
     "wx-devtools": "bin/devtools.js"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chalk": "^4.0.0",
     "chokidar": "^3.4.0",
     "execa": "^4.0.2",
